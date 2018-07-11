@@ -6,3 +6,13 @@
 button:hover {
   cursor: pointer;
 }
+
+div.pbar {
+  height: 20px;
+  background-color: turquoise;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 0.9em;
+  padding-top: 3px;
+  margin-bottom: 5px;
+}
