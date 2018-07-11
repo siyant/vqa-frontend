@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import Dropzone from 'react-dropzone'
 import request from 'superagent'
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -12,9 +12,9 @@ class App extends Component {
     answers: [],
   }
 
-  previewImage(e) {
+  onDrop(files) {
+    let file = files[0]
     let reader = new FileReader();
-    let file = e.target.files[0];
 
     reader.onloadend = () => {
       this.setState({
@@ -27,8 +27,6 @@ class App extends Component {
   }
 
   handleSubmit(e) {
-    console.log('submitting')
-    console.log(this.state.img)
     this.setState({ isLoading: true })
 
     request
@@ -49,8 +47,18 @@ class App extends Component {
     return (
       <div className="App">
         <h4>1. Upload an image</h4>
-        <input type="file" onChange={this.previewImage.bind(this)} /><br /><br />
-        <img src={this.state.imgUrl} style={{maxWidth: '400px', maxHeight: '400px'}} />
+
+        <div className="drop">
+          <p className="drop-text">Drag and drop or click to select image</p>
+          <Dropzone 
+            accept={['image/png', 'image/jpeg']}
+            onDrop={this.onDrop.bind(this)}
+            multiple={false}
+          >
+          </Dropzone>
+        </div>
+        <img src={this.state.imgUrl} style={{height: '200px'}} />
+
 
         <h4>2. Ask a question</h4>
         <input style={{width: '400px'}} type="text" placeholder="Enter a question" value={this.state.question} onChange={e => this.setState({question: e.target.value})} />

@@ -16,3 +16,16 @@ div.pbar {
   padding-top: 3px;
   margin-bottom: 5px;
 }
+
+div.drop {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+p.drop-text {
+  position: absolute;
+  width: 160px;
+  padding: 70px 20px;
+  font-size: 0.8em;
+  text-align: center;
+}
