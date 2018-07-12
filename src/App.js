@@ -27,7 +27,7 @@ class App extends Component {
   }
 
   handleSubmit(e) {
-    this.setState({ isLoading: true })
+    this.setState({ isLoading: true, answers: [] })
 
     request
       .post('http://ec2-34-220-163-4.us-west-2.compute.amazonaws.com/')
@@ -35,10 +35,10 @@ class App extends Component {
       .field('question', this.state.question)
       .then((res) => {
         console.log(res)
-        this.setState({ answers: res.body.pred, isLoading:false })
+        this.setState({ answers: res.body, isLoading: false })
       })
       .catch((err) => {
-        this.setState({ isLoading:false })
+        this.setState({ isLoading: false })
         console.log(err)
       })
   }
@@ -46,7 +46,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h4>1. Upload an image</h4>
+        <h1>Ask me anything</h1>
+        <h4>1. Upload an image (limit: 1MB)</h4>
 
         <div className="drop">
           <p className="drop-text">Drag and drop or click to select image</p>
@@ -57,7 +58,7 @@ class App extends Component {
           >
           </Dropzone>
         </div>
-        <img src={this.state.imgUrl} style={{height: '200px'}} />
+        <img src={this.state.imgUrl} alt="preview" style={{height: '200px'}} />
 
 
         <h4>2. Ask a question</h4>
@@ -71,7 +72,7 @@ class App extends Component {
         {this.state.answers.map((v, k) =>
           <div key={k}>
             {v[0]}
-            <div className="pbar" style={{width: Math.round(v[1]*400)+'px'}}>{v[1]*100}%</div>
+            <div className="pbar" style={{width: Math.round(v[1]*400)+'px'}}>{(v[1]*100).toFixed(2)}%</div>
           </div>
         )}
       </div>
