@@ -47,7 +47,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Ask me anything</h1>
-        <h4>1. Upload an image (limit: 1MB)</h4>
+        <h4>1. Upload an image (limit: 4MB)</h4>
 
         <div className="drop">
           <p className="drop-text">Drag and drop or click to select image</p>
